@@ -11,7 +11,7 @@ pub struct IndexResponse {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct IngestMetricEvent {
-    pub timestamp: u64,
+    pub timestamp: u128,
     pub metric: String,
     pub value: Vec<u8>,
     pub source: Option<String>,
@@ -22,7 +22,7 @@ pub struct IngestMetricEvent {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct EncryptedIngestMetricEvent {
-    pub timestamp: u64,
+    pub timestamp: u128,
     pub metric: String,
     pub value: CipherTextValue,
     pub source: Option<String>,
