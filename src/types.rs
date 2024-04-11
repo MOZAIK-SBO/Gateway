@@ -7,21 +7,37 @@ pub struct IndexResponse {
     pub contact: Vec<String>,
 }
 
-pub type IngestBatch = Vec<IngestMetricEvent>;
+// pub type IngestBatch = Vec<IngestMetricEvent>;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct IngestMetricEvent {
-    pub timestamp: Option<i32>,
+    pub timestamp: u64,
     pub metric: String,
     pub value: Vec<u8>,
     pub source: Option<String>,
-    pub tags: Option<Vec<String>>,
-    pub location: Option<Location>,
-    pub elevation: Option<i32>,
+    // pub tags: Option<Vec<String>>,
+    // pub location: Option<Location>,
+    // pub elevation: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct EncryptedIngestMetricEvent {
+    pub timestamp: u64,
+    pub metric: String,
+    pub value: CipherTextValue,
+    pub source: Option<String>,
+    // pub tags: Option<Vec<String>>,
+    // pub location: Option<Location>,
+    // pub elevation: Option<i32>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 pub struct Location {
     pub lat: i32,
     pub lng: i32,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct CipherTextValue {
+    pub c: Vec<u8>,
 }

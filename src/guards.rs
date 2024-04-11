@@ -4,11 +4,12 @@ use rocket::{
     Request,
 };
 
-pub struct JwtToken(String);
+#[derive(Debug)]
+pub struct JwtToken(pub String);
 
 #[derive(Debug)]
 pub enum JwtTokenError {
-    Missing,
+    // Missing,
     Invalid,
 }
 
@@ -28,7 +29,7 @@ impl<'r> FromRequest<'r> for JwtToken {
                 Outcome::Error((Status::Unauthorized, JwtTokenError::Invalid))
             }
         } else {
-            Outcome::Error((Status::Unauthorized, JwtTokenError::Missing))
+            Outcome::Forward(Status::Unauthorized)
         }
     }
 }
