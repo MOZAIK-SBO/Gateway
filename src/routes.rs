@@ -56,7 +56,7 @@ async fn ingest_obelisk(
             value: CipherTextValue {
                 c: encrypted_data.to_vec(),
             },
-            source: ingest_event.source.clone(),
+            source: format!("[GW] {}", ingest_event.source.clone()),
         }])
         .send()
         .await
